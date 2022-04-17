@@ -1,8 +1,7 @@
-import 'dart:html';
-
 import 'package:chalenge_project/Screens/OTP_Verify_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
 //States Class Start
 class OTP_Screen_State extends StatefulWidget
@@ -50,7 +49,7 @@ class OTP_Screen extends State<OTP_Screen_State>
                         filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(width: 3, color: Color(0XFF4CC9F0)),
+                          borderSide: const BorderSide(width: 1, color: Color(0XFF4CC9F0)),
                         )
                       ),
                     ),
@@ -106,11 +105,11 @@ class OTP_Screen extends State<OTP_Screen_State>
   /***********************************Event Start********************************/
 
   //Get On Click Done Button Event Start
-  void On_Click_Done_Button(BuildContext context)
+  void On_Click_Done_Button(BuildContext context) async
   {
     if(user_phone_number_text_field.text.length==11)
     {
-      Navigator.push(context,MaterialPageRoute(builder: (context)=> OTP_Verify_Screen_State(user_phone_number_text_field.text)));
+        Navigator.push(context,MaterialPageRoute(builder: (context)=> OTP_Verify_Screen_State(user_phone_number_text_field.text)));
     }
   }
   //Get On Click Done Button Event End

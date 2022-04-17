@@ -1,8 +1,6 @@
-import 'dart:html';
-
 import 'package:chalenge_project/Screens/OTP_Verify_Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 //States Class Start
@@ -35,8 +33,17 @@ class OTP_Verify_Screen extends State<OTP_Verify_Screen_State>
   OTP_Verify_Screen(String user_phone_number_text_field_text)
   {
     this.user_phone_number_text_field_text=user_phone_number_text_field_text;
+    Server_Request_Phone();
   }
   //Constractor End
+
+
+  //Send Phone Number To Server Start
+  void Server_Request_Phone() async
+  {
+    var response=await http.get(Uri.parse("http://google.com/"));
+  }
+  //Send Phone Number To Server End
 
 
   //Main Function Start
