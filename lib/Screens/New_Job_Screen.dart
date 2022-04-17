@@ -1,3 +1,4 @@
+import 'package:chalenge_project/Widgets/NumPicker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -90,6 +91,7 @@ class New_Job_Screen extends State<New_Job_Screen_State>
                     child: Text("زمان رویداد",textAlign: TextAlign.right,),
                   )
                   ,
+                  NumPicker(30,10,20)
                   
                 ],
               ),
