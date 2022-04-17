@@ -3,21 +3,40 @@ import 'dart:html';
 import 'package:chalenge_project/Screens/OTP_Verify_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 //States Class Start
-class OTP_Screen_State extends StatefulWidget
+class OTP_Verify_Screen_State extends StatefulWidget
 {
+  //Pass Data Start
+  String user_phone_number_text_field = "";
+  //Pass Data End
+
+  //Constractor Start
+  OTP_Verify_Screen_State(String user_phone_number_text_field_text)
+  {
+    user_phone_number_text_field=user_phone_number_text_field_text;
+  }
+  //Constractor End
+
   @override
-  State<StatefulWidget> createState()=>OTP_Screen();
+  State<StatefulWidget> createState()=>OTP_Verify_Screen(user_phone_number_text_field);
 }
 //States Class End
 
 
 //Main Class Start
-class OTP_Screen extends State<OTP_Screen_State> 
+class OTP_Verify_Screen extends State<OTP_Verify_Screen_State> 
 {
 
-  final user_phone_number_text_field = TextEditingController();
+  String user_phone_number_text_field_text="";
+
+  //Constractor Start
+  OTP_Verify_Screen(String user_phone_number_text_field_text)
+  {
+    this.user_phone_number_text_field_text=user_phone_number_text_field_text;
+  }
+  //Constractor End
 
 
   //Main Function Start
@@ -32,26 +51,32 @@ class OTP_Screen extends State<OTP_Screen_State>
               width: MediaQuery.of(context).size.width*0.8,
               child: Column(
                 children: [
-                  Text("لطفا شماره‌ی تلفن همراه خود را وارد کنید.")
+                  Container(
+                    width: 250,
+                    child: 
+                      Text("کد چهار رقمی ارسال شده به شماره‌ی $user_phone_number_text_field_text را وارد کنید.",
+                    style: TextStyle(
+
+                    ),
+                    maxLines: 2,
+                    textAlign : TextAlign.center),
+                  )
                   ,
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                    width: MediaQuery.of(context).size.width*0.8,
-                    child: TextField(
-                      controller: user_phone_number_text_field,
+                    width: 250,
+                    child: PinCodeTextField(
+                      length: 4,
+                      appContext: context, 
+                      onChanged: (String value) {  },
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      textAlign: TextAlign.right,
-                      decoration: InputDecoration(
-                        hintText: "مثال : 09365464786",
-                        fillColor:Color.fromRGBO(185, 235, 251, 0.2),
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(width: 3, color: Color(0XFF4CC9F0)),
-                        )
+                      pinTheme: PinTheme(
+                        borderWidth: 1,
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(20),
+                        fieldHeight: 50,
+                        fieldWidth: 40,
+                        activeFillColor: Color.fromRGBO(185, 235, 251, 0.2),
                       ),
                     ),
                   )
@@ -108,10 +133,6 @@ class OTP_Screen extends State<OTP_Screen_State>
   //Get On Click Done Button Event Start
   void On_Click_Done_Button(BuildContext context)
   {
-    if(user_phone_number_text_field.text.length==11)
-    {
-      Navigator.push(context,MaterialPageRoute(builder: (context)=> OTP_Verify_Screen_State(user_phone_number_text_field.text)));
-    }
   }
   //Get On Click Done Button Event End
 
