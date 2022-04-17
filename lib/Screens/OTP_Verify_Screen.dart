@@ -1,3 +1,4 @@
+import 'package:chalenge_project/Screens/Main_Screen.dart';
 import 'package:chalenge_project/Screens/OTP_Verify_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -33,17 +34,8 @@ class OTP_Verify_Screen extends State<OTP_Verify_Screen_State>
   OTP_Verify_Screen(String user_phone_number_text_field_text)
   {
     this.user_phone_number_text_field_text=user_phone_number_text_field_text;
-    Server_Request_Phone();
   }
   //Constractor End
-
-
-  //Send Phone Number To Server Start
-  void Server_Request_Phone() async
-  {
-    var response=await http.get(Uri.parse("http://google.com/"));
-  }
-  //Send Phone Number To Server End
 
 
   //Main Function Start
@@ -140,6 +132,7 @@ class OTP_Verify_Screen extends State<OTP_Verify_Screen_State>
   //Get On Click Done Button Event Start
   void On_Click_Done_Button(BuildContext context)
   {
+    Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=> Main_Screen_State()),(Route<dynamic> route)=>false);
   }
   //Get On Click Done Button Event End
 
