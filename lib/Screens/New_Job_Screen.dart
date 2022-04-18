@@ -1,3 +1,5 @@
+import 'package:chalenge_project/Components/Database.dart';
+import 'package:chalenge_project/Models/events_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -172,7 +174,13 @@ class New_Job_Screen extends State<New_Job_Screen_State>
                     borderRadius: BorderRadius.circular(10),
                     child:FlatButton(
                       padding: EdgeInsets.all(0),
-                      onPressed: (){}, 
+                      onPressed: (){
+
+                        var event=const events_model(id:0,title:"Reza",horse:1,min:10,value:10);
+                        new Database().Insert_New_Event(event);
+                        Navigator.pop(context);
+
+                      }, 
                       child:Container(
                           padding: EdgeInsets.all(14),
                           decoration: BoxDecoration(

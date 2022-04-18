@@ -13,4 +13,24 @@ class events_model
     required this.min,
     required this.value,
   });
+
+  Map<String,dynamic> toMap()
+  {
+    return {
+      "id":id,
+      "title":title,
+      "horse":horse,
+      "min":min,
+      "value":value,
+    };
+  }
+
+
+  @override
+  String toString()
+  {
+    return "{id:$id,title:$title,horse:$horse,min:$min,value:$value}";
+  }
+
+
 }

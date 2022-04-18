@@ -1,3 +1,4 @@
+import 'package:chalenge_project/Components/Database.dart';
 import 'package:chalenge_project/Screens/New_Job_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,24 @@ class Main_Screen extends State<Main_Screen_State>
    String _format(Date d) 
    {
     final f = d.formatter;
-
     return '${f.wN} ${f.d} ${f.mN} ${f.yy}';
   }
   //Appbar Header Date End
+
+
+
+  //InitilState Start
+  @override
+  void initState() 
+  {
+    super.initState();
+
+    //Get Initizlize Database
+    new Database().init_database();
+
+  }
+  //InitilState End
+
 
 
   //Main Function Start
