@@ -1,7 +1,9 @@
+import 'package:chalenge_project/Screens/Main_Screen.dart';
 import 'package:chalenge_project/Screens/OTP_Verify_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 //States Class Start
 class OTP_Screen_State extends StatefulWidget
@@ -17,6 +19,29 @@ class OTP_Screen extends State<OTP_Screen_State>
 {
 
   final user_phone_number_text_field = TextEditingController();
+
+
+
+  @override
+  void initState() 
+  {
+    super.initState();
+    Check_Login();
+  }
+
+
+  void Check_Login() async
+  {
+    var data_storage=await SharedPreferences.getInstance();
+    var Phone = data_storage.get("Phone");
+    if(Phone.toString().length!=0)
+    {
+      Navigator.push(context,MaterialPageRoute(builder: (context)=> Main_Screen_State()));
+    }
+  }
+
+
+
 
 
   //Main Function Start

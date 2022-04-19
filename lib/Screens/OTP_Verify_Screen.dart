@@ -3,6 +3,7 @@ import 'package:chalenge_project/Screens/OTP_Verify_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //States Class Start
 class OTP_Verify_Screen_State extends StatefulWidget
@@ -132,11 +133,21 @@ class OTP_Verify_Screen extends State<OTP_Verify_Screen_State>
   //Get On Click Done Button Event Start
   void On_Click_Done_Button(BuildContext context)
   {
+    Save_Phone();
     Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=> Main_Screen_State()),(Route<dynamic> route)=>false);
   }
   //Get On Click Done Button Event End
 
   /***********************************Event End********************************/
+
+
+
+  //Save Phone Number Start
+  void Save_Phone() async 
+  {
+    var data_storage=await SharedPreferences.getInstance();
+    await data_storage.setString("Phone", this.user_phone_number_text_field_text);
+  }
 
 
 

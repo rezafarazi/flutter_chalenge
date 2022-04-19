@@ -20,8 +20,12 @@ class App extends StatelessWidget
       title: 'Flutter Chalenge',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        // fontFamily: 'Dana'
       ),
       home: OTP_Screen_State(),
     );
   }
+
+
+
 }

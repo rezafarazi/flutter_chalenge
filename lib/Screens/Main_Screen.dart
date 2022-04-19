@@ -1,7 +1,8 @@
 import 'package:chalenge_project/Components/Database.dart';
 import 'package:chalenge_project/Screens/New_Job_Screen.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter_week_view/flutter_week_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_week_view/flutter_week_view.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 //State Class Start
@@ -22,7 +23,7 @@ class Main_Screen extends State<Main_Screen_State>
    String _format(Date d) 
    {
     final f = d.formatter;
-    return '${f.wN} ${f.d} ${f.mN} ${f.yy}';
+    return '${f.wN} ${f.d}/${f.mN}/${f.yy}';
   }
   //Appbar Header Date End
 
@@ -46,13 +47,54 @@ class Main_Screen extends State<Main_Screen_State>
   @override
   Widget build(BuildContext context) 
   {
-    return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
-      body: Column(
-        children: [
-          Appbar(context),
-        ],
-      ),
+    return SafeArea(
+      child:Scaffold(
+        backgroundColor: Color(0XFFE5E5E5),
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                Appbar(context),
+                Container(
+                  width: MediaQuery.of(context).size.width*0.9,
+                  height: MediaQuery.of(context).size.height-80,
+                  child: DayView(
+                    date: DateTime.now(),
+                    isRTL: true,
+                    userZoomable: false,
+                  ),
+                )
+              ],
+            )
+            ,
+            Positioned(
+              bottom: 10,
+              child:FlatButton
+              (
+                onPressed: (){},
+                child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width*0.9,
+                    height: 50,
+                    padding: EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Color(0XFF4361EE)
+                    ),
+                    child: Center(
+                      child: Text(
+                        "ثبت"
+                        ,
+                        style: TextStyle(
+                          color: Color(0XFFFFFFFF)
+                        ),),
+                    ),
+                  ),
+                )
+              )
+            )
+          ],
+        ),
+      )
     );
   }
   //Main Function End
