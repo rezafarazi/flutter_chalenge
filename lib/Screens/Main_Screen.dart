@@ -71,7 +71,9 @@ class Main_Screen extends State<Main_Screen_State>
               bottom: 10,
               child:FlatButton
               (
-                onPressed: (){},
+                onPressed: (){
+                  On_Click_New_Job(context);
+                },
                 child: Center(
                   child: Container(
                     width: MediaQuery.of(context).size.width*0.9,
@@ -82,7 +84,7 @@ class Main_Screen extends State<Main_Screen_State>
                     ),
                     child: Center(
                       child: Text(
-                        "ثبت"
+                        "رویداد جدید"
                         ,
                         style: TextStyle(
                           color: Color(0XFFFFFFFF)

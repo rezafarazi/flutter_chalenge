@@ -34,7 +34,8 @@ class OTP_Screen extends State<OTP_Screen_State>
   {
     var data_storage=await SharedPreferences.getInstance();
     var Phone = data_storage.get("Phone");
-    if(Phone.toString().length!=0)
+    debugPrint("Hello "+Phone.toString());
+    if(Phone!=null)
     {
       Navigator.push(context,MaterialPageRoute(builder: (context)=> Main_Screen_State()));
     }
@@ -70,6 +71,7 @@ class OTP_Screen extends State<OTP_Screen_State>
                       textAlign: TextAlign.right,
                       decoration: InputDecoration(
                         hintText: "مثال : 09365464786",
+                        contentPadding: EdgeInsets.only(top: 1,bottom: 1,left: 14,right:14),
                         fillColor:Color.fromRGBO(185, 235, 251, 0.2),
                         filled: true,
                         border: OutlineInputBorder(

@@ -27,6 +27,8 @@ class New_Job_Screen extends State<New_Job_Screen_State>
   late int New_Event_Value;
 
   late Color Done_Button_Color;
+
+  final new_event_title_text_field = TextEditingController();
   //Globla Varibel End
 
 
@@ -90,6 +92,7 @@ class New_Job_Screen extends State<New_Job_Screen_State>
                     margin: EdgeInsets.only(top: 16),
                     width: MediaQuery.of(context).size.width,
                     child: TextField(
+                      controller: new_event_title_text_field,
                       onChanged: (text){
                         setState(() {
                           if(text.length>0)
@@ -176,9 +179,17 @@ class New_Job_Screen extends State<New_Job_Screen_State>
                       padding: EdgeInsets.all(0),
                       onPressed: (){
 
-                        var event=const events_model(id:0,title:"Reza",horse:1,min:10,value:10);
-                        new Database().Insert_New_Event(event);
-                        Navigator.pop(context);
+                        if(new_event_title_text_field.text.toString().length>0)
+                        {
+                          String title_text=new_event_title_text_field.text.toString();
+                          int horse_value=New_Event_Horse;
+                          int min_value=New_Event_Min;
+                          int value_value=New_Event_Value;
+
+                          var event=events_model(id:0,title:title_text,horse:horse_value,min:min_value,value:value_value);
+                          new Database().Insert_New_Event(event);
+                          Navigator.pop(context);
+                        }
 
                       }, 
                       child:Container(
