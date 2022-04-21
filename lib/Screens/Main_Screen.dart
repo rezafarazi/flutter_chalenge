@@ -54,43 +54,75 @@ class Main_Screen extends State<Main_Screen_State>
           children: [
             Column(
               children: [
-                Appbar(context),
                 Container(
-                  width: MediaQuery.of(context).size.width*0.9,
-                  height: MediaQuery.of(context).size.height-80,
-                  child: DayView(
-                    date: DateTime.now(),
-                    isRTL: true,
-                    userZoomable: false,
+                  margin: EdgeInsets.only(top: 10),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height-10,
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: DayView(
+                      date: DateTime.now(),
+                      isRTL: true,
+                      style: DayViewStyle(
+                        backgroundColor: Color(0XFFFFFFFF),
+                        backgroundRulesColor : Color(0XFFE5E5E5),
+                        currentTimeCircleColor: Color(0XFF4361EE),
+                        currentTimeRuleColor: Color(0XFF4361EE),
+                      ),
+                      dayBarStyle: DayBarStyle(
+                        color: Color(0XFFE5E5E5),
+                        textStyle: TextStyle(
+                          color: Color(0XFFE5E5E5)
+                        ),
+                      ),
+                      userZoomable: false,
+                      events: [
+                        FlutterWeekViewEvent(
+                          backgroundColor: Color(0XFF3A0CA3),                        
+                          title: 'An event 1',
+                          description: 'A description 1',
+                          start: DateTime.now().subtract(const Duration(minutes: 1)),
+                          end: DateTime.now().add(const Duration(minutes: 50)),
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
             )
             ,
             Positioned(
+              child: Appbar(context),
+              top: 0,
+            )
+            ,
+            Positioned(
               bottom: 10,
-              child:FlatButton
-              (
-                onPressed: (){
-                  On_Click_New_Job(context);
-                },
-                child: Center(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width*0.9,
-                    height: 50,
-                    padding: EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: Color(0XFF4361EE)
+              child:Container(
+                margin: EdgeInsets.all(14),
+                width: MediaQuery.of(context).size.width-28,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child:FlatButton(
+                      padding: EdgeInsets.all(0),
+                      onPressed: (){
+                        On_Click_New_Job(context);
+                      }, 
+                      child:Container(
+                          padding: EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: Color(0XFF4361EE)
+                          ),
+                          child: Center(
+                            child: Text(
+                              "ثبت"
+                              ,
+                              style: TextStyle(
+                                color: Color(0XFFFFFFFF)
+                              ),),
+                          ),
+                        ),
                     ),
-                    child: Center(
-                      child: Text(
-                        "رویداد جدید"
-                        ,
-                        style: TextStyle(
-                          color: Color(0XFFFFFFFF)
-                        ),),
-                    ),
-                  ),
                 )
               )
             )
