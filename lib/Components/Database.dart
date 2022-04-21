@@ -37,4 +37,15 @@ class Database
   }
 
 
+
+  Future<List<events_model>> Get_All_Event() async
+  {
+    List<Map<String,dynamic>> events = await db.query('events_tbl');
+    return List.generate(events.length, (index)  {
+      return events_model(id: events[index]['id'], title: events[index]['title'], horse: events[index]['horse'], min: events[index]['min'], value: events[index]['value']);
+    });
+  }
+
+
+
 }

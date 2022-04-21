@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:chalenge_project/Components/Database.dart';
+import 'package:chalenge_project/Models/events_model.dart';
 import 'package:chalenge_project/Screens/New_Job_Screen.dart';
 // import 'package:flutter_week_view/flutter_week_view.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,8 @@ class Main_Screen extends State<Main_Screen_State>
 {
 
 
+
+
   //Appbar Header Date Start
    String _format(Date d) 
    {
@@ -34,7 +39,6 @@ class Main_Screen extends State<Main_Screen_State>
   void initState() 
   {
     super.initState();
-
     //Get Initizlize Database
     new Database().init_database();
 
@@ -49,7 +53,7 @@ class Main_Screen extends State<Main_Screen_State>
   {
     return SafeArea(
       child:Scaffold(
-        backgroundColor: Color(0XFFE5E5E5),
+        backgroundColor: Color(0XFFFFFFFF),
         body: Stack(
           children: [
             Column(
@@ -64,8 +68,9 @@ class Main_Screen extends State<Main_Screen_State>
                       date: DateTime.now(),
                       isRTL: true,
                       style: DayViewStyle(
+                        currentTimeCircleRadius: BorderRadius.circular(5),
                         backgroundColor: Color(0XFFFFFFFF),
-                        backgroundRulesColor : Color(0XFFE5E5E5),
+                        backgroundRulesColor : Color(0XFFC2C7CC),
                         currentTimeCircleColor: Color(0XFF4361EE),
                         currentTimeRuleColor: Color(0XFF4361EE),
                       ),
@@ -77,6 +82,9 @@ class Main_Screen extends State<Main_Screen_State>
                       ),
                       userZoomable: false,
                       events: [
+                        FutureBuilder<events_model>(
+                          future: ,
+                        )
                         FlutterWeekViewEvent(
                           backgroundColor: Color(0XFF3A0CA3),                        
                           title: 'An event 1',
@@ -139,6 +147,7 @@ class Main_Screen extends State<Main_Screen_State>
   Widget Appbar(BuildContext context)
   {
     return Container(
+      color: Color(0XFFFFFFFF),
       width: MediaQuery.of(context).size.width,
       height: 50,
       child: Center(child: Text(_format(Jalali.now())),),
@@ -154,6 +163,10 @@ class Main_Screen extends State<Main_Screen_State>
     Navigator.push(context, MaterialPageRoute(builder: (context)=>New_Job_Screen_State()));
   }
   //Get New Job End
+
+
+
+
 
 
 }
