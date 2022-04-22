@@ -23,6 +23,14 @@ class Main_Screen extends State<Main_Screen_State>
 
 
 
+  //Global Variabl Start
+  late Future<List<events_model>> Get_All_Event;
+  var All_Events_List;
+  //Global Variabl End
+
+
+
+
 
   //Appbar Header Date Start
    String _format(Date d) 
@@ -39,8 +47,21 @@ class Main_Screen extends State<Main_Screen_State>
   void initState() 
   {
     super.initState();
+
     //Get Initizlize Database
     new Database().init_database();
+
+    //Read Events From Database Start
+    Get_All_Event=new Database().Get_All_Event();
+    FutureBuilder(
+      future: Get_All_Event,
+      builder: (BuildContext context,AsyncSnapshot snapshot)
+      {
+        return Text("");
+      }
+    );
+    All_Events_List=List<events_model>;
+    //Read Events From Database End
 
   }
   //InitilState End
@@ -68,7 +89,6 @@ class Main_Screen extends State<Main_Screen_State>
                       date: DateTime.now(),
                       isRTL: true,
                       style: DayViewStyle(
-                        currentTimeCircleRadius: BorderRadius.circular(5),
                         backgroundColor: Color(0XFFFFFFFF),
                         backgroundRulesColor : Color(0XFFC2C7CC),
                         currentTimeCircleColor: Color(0XFF4361EE),
@@ -82,15 +102,12 @@ class Main_Screen extends State<Main_Screen_State>
                       ),
                       userZoomable: false,
                       events: [
-                        FutureBuilder<events_model>(
-                          future: ,
-                        )
-                        FlutterWeekViewEvent(
-                          backgroundColor: Color(0XFF3A0CA3),                        
-                          title: 'An event 1',
-                          description: 'A description 1',
-                          start: DateTime.now().subtract(const Duration(minutes: 1)),
-                          end: DateTime.now().add(const Duration(minutes: 50)),
+                          FlutterWeekViewEvent(
+                            backgroundColor: Color(0XFF3A0CA3),
+                            title: 'An event 1',
+                            description: 'A description 1',
+                            start: DateTime.now().subtract(const Duration(minutes: 1)),
+                            end: DateTime.now().add(const Duration(minutes: 50)),
                         )
                       ],
                     ),
