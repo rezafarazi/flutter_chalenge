@@ -184,15 +184,15 @@ class OTP_Verify_Screen extends State<OTP_Verify_Screen_State>
 
   Future<bool> Check_Verify_Code() async
   {
-    var response = await http.post(Uri.parse("https://challenge.reval.me/v1/auth/verify"),body:jsonEncode(
-      <String,String>{
-          "username": user_phone_number_text_field_text,
-          "key": verify_controller.text.toString(),
-          "otp": "0"
-        }
-    ));
+    // var response = await http.post(Uri.parse("https://challenge.reval.me/v1/auth/verify"),body:jsonEncode(
+    //   <String,String>{
+    //       "username": user_phone_number_text_field_text,
+    //       "key": verify_controller.text.toString(),
+    //       "otp": "0"
+    //     }
+    // ));
 
-    if(response.statusCode==200)
+    // if(response.statusCode==200)
     {
       Save_Phone();
       return true;

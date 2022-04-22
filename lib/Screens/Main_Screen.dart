@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:chalenge_project/Components/Database.dart';
 import 'package:chalenge_project/Models/events_model.dart';
 import 'package:chalenge_project/Screens/New_Job_Screen.dart';
@@ -24,8 +22,7 @@ class Main_Screen extends State<Main_Screen_State>
 
 
   //Global Variabl Start
-  late Future<List<events_model>> Get_All_Event;
-  var All_Events_List;
+  late List<events_model> all_events;
   //Global Variabl End
 
 
@@ -52,15 +49,10 @@ class Main_Screen extends State<Main_Screen_State>
     new Database().init_database();
 
     //Read Events From Database Start
-    Get_All_Event=new Database().Get_All_Event();
-    FutureBuilder(
-      future: Get_All_Event,
-      builder: (BuildContext context,AsyncSnapshot snapshot)
-      {
-        return Text("");
-      }
-    );
-    All_Events_List=List<events_model>;
+    var events_future=new Database().Get_All_Event();
+    events_future.then((value){
+      all_events=value;
+    });
     //Read Events From Database End
 
   }
