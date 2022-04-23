@@ -1,5 +1,6 @@
 import 'package:chalenge_project/Components/Database.dart';
 import 'package:chalenge_project/Models/events_model.dart';
+import 'package:chalenge_project/Screens/Main_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -188,7 +189,8 @@ class New_Job_Screen extends State<New_Job_Screen_State>
 
                           var event=events_model(id:0,title:title_text,horse:horse_value,min:min_value,value:value_value);
                           new Database().Insert_New_Event(event);
-                          Navigator.pop(context,"Get_All_Events");
+                          // Navigator.pop(context);
+                          Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=> Main_Screen_State()),(Route<dynamic> route)=>false);
                         }
 
                       }, 
