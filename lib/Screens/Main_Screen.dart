@@ -104,8 +104,8 @@ class Main_Screen extends State<Main_Screen_State>
                             backgroundColor: Color(0XFF3A0CA3),
                             title: all_events[a].title,
                             description: all_events[a].title,
-                            start: date.add(Duration(hours: all_events[a].horse)),
-                            end: date.add(Duration(hours: all_events[a].horse,minutes: all_events[a].min)),
+                            start: DateTime(now.year, now.month, now.day, all_events[a].horse , all_events[a].min),
+                            end: DateTime(now.year, now.month, now.day, all_events[a].horse , all_events[a].min + all_events[a].value),
                         ),
                         // FlutterWeekViewEvent(
                         //     backgroundColor: Color(0XFF3A0CA3),

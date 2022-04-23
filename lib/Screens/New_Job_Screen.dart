@@ -188,7 +188,7 @@ class New_Job_Screen extends State<New_Job_Screen_State>
 
                           var event=events_model(id:0,title:title_text,horse:horse_value,min:min_value,value:value_value);
                           new Database().Insert_New_Event(event);
-                          Navigator.pop(context);
+                          Navigator.pop(context,"Get_All_Events");
                         }
 
                       }, 
