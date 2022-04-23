@@ -25,7 +25,7 @@ class Main_Screen extends State<Main_Screen_State>
 
 
   //Global Variabl Start
-  late List<events_model> all_events;
+  List<events_model> all_events=[];
   //Global Variabl End
 
 
@@ -182,14 +182,18 @@ class Main_Screen extends State<Main_Screen_State>
   void Get_All_Events() async
   {  
     var data_storage=await SharedPreferences.getInstance();
-    for(int i=0;i<data_storage.getString("Json_Title_Database")!.split(',').length;i++)
+    for(int i=0;i<data_storage.getString("Json_Title_Database")!.split(',').length-1;i++)
     {
+      debugPrint(data_storage.getString("Json_Title_Database")!.split(',')[i]);
+      debugPrint(data_storage.getString("Json_Horse_Database")!.split(',')[i]);
+      debugPrint(data_storage.getString("Json_Min_Database")!.split(',')[i]);
+      debugPrint(data_storage.getString("Json_Value_Database")!.split(',')[i]);
       all_events.add(new events_model(
         id: 0,
         title:data_storage.getString("Json_Title_Database")!.split(',')[i],
-        horse: data_storage.getString("Json_Horse_Database")!.split(',')[i] as int,
-        min:data_storage.getString("Json_Min_Database")!.split(',')[i] as int,
-        value:data_storage.getString("Json_Value_Database")!.split(',')[i] as int));
+        horse:int.parse(data_storage.getString("Json_Horse_Database")!.split(',')[i].trim()),
+        min:int.parse(data_storage.getString("Json_Min_Database")!.split(',')[i].trim()),
+        value:int.parse(data_storage.getString("Json_Value_Database")!.split(',')[i].trim())));
     }
     
   }
