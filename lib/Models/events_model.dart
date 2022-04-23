@@ -29,7 +29,13 @@ class events_model
   @override
   String toString()
   {
-    return "{id:$id,title:$title,horse:$horse,min:$min,value:$value}";
+    return "{id:$id,title:'$title',horse:'$horse',min:'$min',value:'$value'}";
+  }
+
+
+  factory events_model.from_json(Map<String,dynamic> json)
+  {
+    return events_model(id: json['id'],title: json['title'],horse: json['horse'],min: json['min'],value: json['value']);
   }
 
 

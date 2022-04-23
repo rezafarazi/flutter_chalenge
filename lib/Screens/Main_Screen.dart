@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chalenge_project/Components/Database.dart';
 import 'package:chalenge_project/Models/events_model.dart';
 import 'package:chalenge_project/Screens/New_Job_Screen.dart';
@@ -5,6 +7,7 @@ import 'package:chalenge_project/Screens/New_Job_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_week_view/flutter_week_view.dart';
 import 'package:shamsi_date/shamsi_date.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //State Class Start
 class Main_Screen_State extends StatefulWidget
@@ -43,18 +46,15 @@ class Main_Screen extends State<Main_Screen_State>
   @override
   void initState() 
   {
-    super.initState();
-
+    
     //Get Initizlize Database
     new Database().init_database();
 
     //Read Events From Database Start
-    var events_future=new Database().Get_All_Event();
-    events_future.then((value){
-      all_events=value;
-    });
+    Get_All_Events();
     //Read Events From Database End
 
+    super.initState();
   }
   //InitilState End
 
@@ -94,11 +94,12 @@ class Main_Screen extends State<Main_Screen_State>
                       ),
                       userZoomable: false,
                       events: [
+                        for(int a=0;a<all_events.length;a++)
                           FlutterWeekViewEvent(
                             backgroundColor: Color(0XFF3A0CA3),
-                            title: 'An event 1',
-                            description: 'A description 1',
-                            start: DateTime.now().subtract(const Duration(minutes: 1)),
+                            title: all_events[a].title,
+                            description: all_events[a].title,
+                            start: DateTime.now(),
                             end: DateTime.now().add(const Duration(minutes: 50)),
                         )
                       ],
@@ -173,6 +174,26 @@ class Main_Screen extends State<Main_Screen_State>
   }
   //Get New Job End
 
+
+
+
+
+  //Get All Events Start
+  void Get_All_Events() async
+  {  
+    var data_storage=await SharedPreferences.getInstance();
+    for(int i=0;i<data_storage.getString("Json_Title_Database")!.split(',').length;i++)
+    {
+      all_events.add(new events_model(
+        id: 0,
+        title:data_storage.getString("Json_Title_Database")!.split(',')[i],
+        horse: data_storage.getString("Json_Horse_Database")!.split(',')[i] as int,
+        min:data_storage.getString("Json_Min_Database")!.split(',')[i] as int,
+        value:data_storage.getString("Json_Value_Database")!.split(',')[i] as int));
+    }
+    
+  }
+  //Get All Events End
 
 
 
