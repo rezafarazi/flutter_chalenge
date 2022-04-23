@@ -64,6 +64,10 @@ class Main_Screen extends State<Main_Screen_State>
   @override
   Widget build(BuildContext context) 
   {
+    
+    DateTime now = DateTime.now();
+    DateTime date = DateTime(now.year, now.month, now.day);
+    
     return SafeArea(
       child:Scaffold(
         backgroundColor: Color(0XFFFFFFFF),
@@ -94,14 +98,21 @@ class Main_Screen extends State<Main_Screen_State>
                       ),
                       userZoomable: false,
                       events: [
+
                         for(int a=0;a<all_events.length;a++)
                           FlutterWeekViewEvent(
                             backgroundColor: Color(0XFF3A0CA3),
                             title: all_events[a].title,
                             description: all_events[a].title,
-                            start: DateTime.now(),
-                            end: DateTime.now().add(const Duration(minutes: 50)),
-                        )
+                            start: date.add(Duration(hours: all_events[a].horse)),
+                            end: date.add(Duration(hours: all_events[a].horse,minutes: all_events[a].min)),
+                        ),
+                        // FlutterWeekViewEvent(
+                        //     backgroundColor: Color(0XFF3A0CA3),
+                        //     title:"salam",
+                        //     description: "hello",
+                        //     start: DateTime.now(),
+                        //     end: DateTime.now().add(const Duration(minutes: 50)))
                       ],
                     ),
                   ),
@@ -182,18 +193,21 @@ class Main_Screen extends State<Main_Screen_State>
   void Get_All_Events() async
   {  
     var data_storage=await SharedPreferences.getInstance();
+
     for(int i=0;i<data_storage.getString("Json_Title_Database")!.split(',').length-1;i++)
     {
       debugPrint(data_storage.getString("Json_Title_Database")!.split(',')[i]);
       debugPrint(data_storage.getString("Json_Horse_Database")!.split(',')[i]);
       debugPrint(data_storage.getString("Json_Min_Database")!.split(',')[i]);
       debugPrint(data_storage.getString("Json_Value_Database")!.split(',')[i]);
-      all_events.add(new events_model(
+      setState(() {
+        all_events.add(new events_model(
         id: 0,
         title:data_storage.getString("Json_Title_Database")!.split(',')[i],
         horse:int.parse(data_storage.getString("Json_Horse_Database")!.split(',')[i].trim()),
         min:int.parse(data_storage.getString("Json_Min_Database")!.split(',')[i].trim()),
         value:int.parse(data_storage.getString("Json_Value_Database")!.split(',')[i].trim())));
+      });
     }
     
   }
